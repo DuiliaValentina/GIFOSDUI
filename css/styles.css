@@ -96,3 +96,64 @@ img {vertical-align: middle;}
   to {opacity: 1}
 }
 
+header {
+  height: 95px;
+  background: white;
+  width: 100%;
+  position: fixed;
+  z-index: 3;
+}
+
+header .line {
+  height: 5px;
+  width: 100%;
+  background: #572EE5;
+}
+
+header .logo{
+  height: 3.9%;
+  width: 4.1%;
+  margin-left: 10.8%;
+  margin-top: 18px;
+}
+
+header .navigation{
+  font-family: 'Montserrat', sans-serif;
+  float: right;
+  margin-right: 10.8%;
+  align-items: center;
+  
+}
+
+header .navigation .menu ul {
+  position: relative;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  background: unset;
+  height: unset;
+}
+
+header .navigation .menu ul li {
+  padding: 5px 10px;
+  display: inline-block;
+  }
+
+header .navigation .menu ul li:hover {
+  background: unset;
+}
+
+header .navigation .menu ul li a {
+  padding: unset;
+  color: #572EE5;
+  line-height: unset;
+  text-decoration:none
+}
+
+header .navigation .menu ul li a:hover {
+  color: aqua;
+}
+
+main .container1{
+  margin-top: 10%;
+}

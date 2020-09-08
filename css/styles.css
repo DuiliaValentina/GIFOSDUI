@@ -102,6 +102,7 @@ header {
   width: 100%;
   position: fixed;
   z-index: 3;
+  top: 0;
 }
 
 header .line {
@@ -155,5 +156,20 @@ header .navigation .menu ul li a:hover {
 }
 
 main .container1{
-  margin-top: 10%;
+  width: 100%;
+  text-align:center;
 }
+
+main .container1 h1{
+  margin-top: 10%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 35px;
+  color: #572EE5;
+  text-align: center;
+  line-height: 50px;
+}
+
+main .container1 .colgif{
+  color:aqua;
+}
+

@@ -2,8 +2,10 @@ var offset = 0;
 
 fillSlides();
 
-function Search() {
-    searchPrefetch(0, false);
+function Search(e) {
+    if (e.keyCode === 13) {
+        searchPrefetch(0, false);
+    }
 };
 
 function searchPrefetch(offset, ifSeeMore) {
@@ -66,7 +68,7 @@ function showSlides(n) {
 }
 
 function fillSlides() {
-    var url ="https://api.giphy.com/v1/gifs/trending?api_key=uXeIYjblhtWKqef33kir3YfDInqBBfD4&limit=9&offset=0&rating=g";
+    var url = "https://api.giphy.com/v1/gifs/trending?api_key=uXeIYjblhtWKqef33kir3YfDInqBBfD4&limit=9&offset=0&rating=g";
 
     fetch(url)
         .then((resp) => resp.json())

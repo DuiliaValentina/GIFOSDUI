@@ -11,7 +11,7 @@ function Search(e) {
 function searchPrefetch(offset, ifSeeMore) {
     var searchText = document.getElementById('searchText').value;
     document.getElementById('searchResults').innerHTML = searchText;
-    var url = "https://api.giphy.com/v1/gifs/search?api_key=uXeIYjblhtWKqef33kir3YfDInqBBfD4&q=" + searchText + "&limit=4&offset=" + offset + "&rating=r&lang=en";
+    var url = "https://api.giphy.com/v1/gifs/search?api_key=uXeIYjblhtWKqef33kir3YfDInqBBfD4&q=" + searchText + "&limit=12&offset=" + offset + "&rating=r&lang=en";
 
     fetch(url)
         .then((resp) => resp.json())
@@ -20,6 +20,9 @@ function searchPrefetch(offset, ifSeeMore) {
             if (ifSeeMore == false) {
                 document.getElementById('searchDiv').innerHTML = '';
             }
+
+            document.getElementById('seeMoreButton').classList.remove('hiddenButton');
+
             response.data.forEach(element => {
                 var url = element.images.downsized.url;
                 var div = document.createElement('div');
@@ -33,9 +36,9 @@ function searchPrefetch(offset, ifSeeMore) {
 
 function seeMore() {
     if (offset == 0) {
-        offset = 4;
+        offset = 12;
     } else {
-        offset += 4;
+        offset += 12;
     }
     searchPrefetch(offset, true);
 }

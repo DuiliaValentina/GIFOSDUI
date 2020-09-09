@@ -96,7 +96,7 @@ header {
 }
 
 header .line {
-  height: 5px;
+  height: 3px;
   width: 100%;
   background: #572EE5;
 }
@@ -105,7 +105,7 @@ header .logo{
   height: 3.9%;
   width: 4.1%;
   margin-left: 10.8%;
-  margin-top: 18px;
+  margin-top: 5px;
 }
 
 header .navigation{
@@ -160,6 +160,28 @@ main .container1 h1{
 
 main .container1 .colgif{
   color:aqua;
+}
+
+.searchText {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+   border-radius: 50px;
+   border: 1px solid #572EE5;
+   width: 550px;
+   height: 50px;
+   padding-left: 40px;
+   font-size: 15px;
+   background: url(../assets/icon-search.svg) no-repeat scroll 7px 7px;
+   background-position-x: 96%;
+   background-position-y: 50%;
+}
+
+.searchText:focus {
+  outline: none;
+}
+
+.img1 {
+  padding-right: 50px;
 }
 
 main .description h4{

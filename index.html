@@ -22,6 +22,7 @@
                     <li><a href="#nocturno">MODO NOCTURNO</a></li>
                     <li><a href="#favoritos">FAVORITOS</a></li>
                     <li><a href="#gifos">MIS GIFOS</a></li>
+                    <li><img src="assets/button-crear-gifo.svg" alt="imagen-ver-mas"></li>
                 </ul>
             </div>
         </nav>
@@ -29,24 +30,21 @@
     <main class="main">
         <section class="container1">
             <h1>
-                Inspírate, busca, guarda, y crea los mejores <span class="colgif">GIFOS</span>
+                <span>Inspírate, busca, guarda, y crea</span>
+                <br>
+                los mejores <span class="colgif">GIFOS</span>
             </h1>
             <br>
             <div class="img1">
                 <img src="assets/ilustra_header.svg" alt="imagen-bienvenida">
             </div>
-            <br>
-            <input id="searchText" type="text" />
-            <button onclick="Search()">BUSCAR
-            </button>
+            <input onkeypress="Search(event)" class="searchText" placeholder="Buscar GIFOS y más" id="searchText" type="text" />          
             <h4 id="searchResults"> </h4>
             <div id="searchDiv" class="styleSearch">
-
             </div>
             <button onclick="seeMore()" id="seeMoreButton">
                 Ver más
             </button>
-
         </section>
         <section class="description">
             <h4>

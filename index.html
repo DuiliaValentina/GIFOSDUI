@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/dc66d71582.js" crossorigin="anonymous"></script>
+
     <title>GIFOS</title>
 </head>
 
@@ -62,10 +64,10 @@
             <p class="p-b">
                 Mira los últimos GIFO de nuestra comunidad.
             </p>
+            <br>
             <div class="slideshow-container">
-                <button onclick="plusSlides(-1)">
-                    <img src="assets/button-slider-left.svg
-                    " alt="imagen-carrusel">
+                <button class="btn-carrusel" onclick="plusSlides(-1)">
+                    <img class="prev-button" alt="imagen-carrusel">
                 </button>
 
                 <div class="mySlides fade">
@@ -86,21 +88,42 @@
                     <img class="trendingImg" src="#">
                 </div>
                 
-                <button onclick="plusSlides(1)">
-                    <img src="assets/button-slider-right.svg
-                " alt="imagen-carrusel">
+                <button class="btn-carrusel" onclick="plusSlides(1)">
+                    <img class="next-button" alt="imagen-carrusel">
                 </button>
-            </div>
-            <br>
-            <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
             </div>
         </section>
     </main>
     <footer>
-
+        <section class="footer1">
+            <p>
+                Compartir en:
+            </p>
+            <ul>
+                <li>
+                    <a href='https://www.facebook.com/' target="_blank">
+                        <i class="fab fa-facebook-f">
+                        </i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/home">
+                        <i class="fab fa-twitter">
+                        </i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/">
+                        <i class="fab fa-instagram"> 
+                        </i>
+                    </a>
+                </li>
+            </ul> 
+            <p>
+                © GIFOS 2020 All Rights Reserved.
+            </p>
+        </section>
+        <div class="line-bottom"></div>
     </footer>
     <script src="js/main.js"></script>
 </body>

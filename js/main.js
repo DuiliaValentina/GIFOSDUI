@@ -26,12 +26,83 @@ function searchPrefetch(offset, ifSeeMore) {
             response.data.forEach(element => {
                 var url = element.images.downsized.url;
                 var div = document.createElement('div');
-                div.className = 'div-gifs';
-                div.innerHTML = '<img src="' + url + '" width="260" height="200">';
+                div.className = 'div-gifs';               
+                div.style.backgroundImage = 'url(' + url + ')';
+                div.onmouseover = function () { createImages(div, url); };
+                div.onmouseleave = function () { removeImages(div); };
+                div.innerHTML = "<div class='img-div'></div>";
                 // asignar gif
                 document.getElementById('searchDiv').appendChild(div);
             });
         })
+}
+
+function createImages(mainDiv, url) {
+    var div = mainDiv.getElementsByClassName("img-div")[0];
+    var img1 = div.getElementsByClassName("max-button");
+    if(img1.length < 1 )
+    {
+        var img = document.createElement('img');
+        img.setAttribute('class','max-button');
+        img.onclick = function() {
+            imgMax.src = url;
+            modal.style.display = "block";
+        };
+        div.appendChild(img);   
+    }
+    
+    var img2 = div.getElementsByClassName("download-button");
+    if(img2.length < 1 )
+    {
+        var img = document.createElement('img');
+        img.setAttribute('class','download-button');
+        img.onclick = function() {
+            (async () => {
+                let a = document.createElement('a');          
+                let response = await fetch(url);
+                let file = await response.blob();
+                a.download = 'gif';
+                a.href = window.URL.createObjectURL(file);
+                a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
+                a.click();
+              })();
+        };
+        div.appendChild(img);   
+    } 
+
+    var img3 = div.getElementsByClassName("fav-button");
+    if(img3.length < 1 )
+    {
+        var img = document.createElement('img');
+        img.setAttribute('class','fav-button');
+        img.onclick = saveFavorites;
+        div.appendChild(img);   
+    } 
+}
+
+function removeImages(mainDiv) {
+    var div = mainDiv.getElementsByClassName("img-div")[0];
+    var img1 = div.getElementsByClassName("max-button");
+    if(img1.length > 0)
+    {
+        div.removeChild(img1[0]);
+    }    
+
+    var img2 = div.getElementsByClassName("download-button");
+    if(img2.length > 0)
+    {
+        div.removeChild(img2[0]);
+    }   
+
+    var img3 = div.getElementsByClassName("fav-button");
+    if(img3.length > 0)
+    {
+        div.removeChild(img3[0]);
+    } 
+}
+
+function saveFavorites() {
+    alert('Esto es una prueba');
 }
 
 function seeMore() {
@@ -56,18 +127,13 @@ function currentSlide(n) {
 
 function showSlides(n) {
     var i;
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("dot");
+    var slides = document.getElementsByClassName("mySlides");   
     if (n > slides.length) { slideIndex = 1 }
     if (n < 1) { slideIndex = slides.length }
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
     slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
 }
 
 function fillSlides() {
@@ -84,6 +150,14 @@ function fillSlides() {
 
 }
 
+var modal = document.getElementById("myModal");
+var imgMax = document.getElementById("imgGifMax")
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 
 
 

@@ -215,7 +215,18 @@ main .container2 h2{
   padding-top: 4.4% ;
   color: #572EE5;
   font-family: 'Montserrat', sans-serif;
+}
 
+main .containerFavorites{
+  margin-top: 5%;
+  text-align: center;
+  background: #F3F5F8;
+}
+
+main .containerFavorites h2{
+  margin-top: 5%;
+  color: #572EE5;
+  font-family: 'Montserrat', sans-serif;
 }
 
 main .slideshow-container{
@@ -282,6 +293,13 @@ main .container1 h4{
 
 .fav-button{
   content: url(../assets/icon-fav.svg);
+  float: right;
+  padding-right: 10px;
+  padding-top: 6px;
+}
+
+.fav-button-selected{
+  content: url(../assets/icon-fav-active.svg);
   float: right;
   padding-right: 10px;
   padding-top: 6px;

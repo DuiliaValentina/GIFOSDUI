@@ -1,6 +1,7 @@
 var offset = 0;
 
 fillSlides();
+searchFavorites(false);
 
 function Search(e) {
     if (e.keyCode === 13) {
@@ -26,9 +27,10 @@ function searchPrefetch(offset, ifSeeMore) {
             response.data.forEach(element => {
                 var url = element.images.downsized.url;
                 var div = document.createElement('div');
-                div.className = 'div-gifs';               
+
+                div.className = 'div-gifs';
                 div.style.backgroundImage = 'url(' + url + ')';
-                div.onmouseover = function () { createImages(div, url); };
+                div.onmouseover = function () { createImages(div, url, element.id); };
                 div.onmouseleave = function () { removeImages(div); };
                 div.innerHTML = "<div class='img-div'></div>";
                 // asignar gif
@@ -37,72 +39,95 @@ function searchPrefetch(offset, ifSeeMore) {
         })
 }
 
-function createImages(mainDiv, url) {
+function createImages(mainDiv, url, gifId) {
     var div = mainDiv.getElementsByClassName("img-div")[0];
     var img1 = div.getElementsByClassName("max-button");
-    if(img1.length < 1 )
-    {
+    if (img1.length < 1) {
         var img = document.createElement('img');
-        img.setAttribute('class','max-button');
-        img.onclick = function() {
+        img.setAttribute('class', 'max-button');
+        img.onclick = function () {
             imgMax.src = url;
             modal.style.display = "block";
         };
-        div.appendChild(img);   
+        div.appendChild(img);
     }
-    
+
     var img2 = div.getElementsByClassName("download-button");
-    if(img2.length < 1 )
-    {
+    if (img2.length < 1) {
         var img = document.createElement('img');
-        img.setAttribute('class','download-button');
-        img.onclick = function() {
+        img.setAttribute('class', 'download-button');
+        img.onclick = function () {
             (async () => {
-                let a = document.createElement('a');          
+                let a = document.createElement('a');
                 let response = await fetch(url);
                 let file = await response.blob();
-                a.download = 'gif';
+                a.download = 'image';
                 a.href = window.URL.createObjectURL(file);
                 a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
                 a.click();
-              })();
+            })();
         };
-        div.appendChild(img);   
-    } 
+        div.appendChild(img);
+    }
 
     var img3 = div.getElementsByClassName("fav-button");
-    if(img3.length < 1 )
-    {
+    var img3Selected = div.getElementsByClassName("fav-button-selected");
+    if (img3.length < 1 && img3Selected.length < 1) {
         var img = document.createElement('img');
-        img.setAttribute('class','fav-button');
-        img.onclick = saveFavorites;
-        div.appendChild(img);   
-    } 
+        var savedIds = JSON.parse(localStorage.getItem("favorites-gifs-ids"));
+        if (savedIds && savedIds.find(x => x == gifId)) {
+            img.setAttribute('class', 'fav-button-selected');
+            img.setAttribute('gif-id', gifId);
+            img.onclick = function () {
+                var currentId = this.getAttribute("gif-id");
+                savedIds.splice(currentId, 1);
+
+                img.setAttribute('class', 'fav-button');
+                localStorage.setItem("favorites-gifs-ids", JSON.stringify(savedIds));
+            };
+        }
+        else {
+            img.setAttribute('class', 'fav-button');
+            img.setAttribute('gif-id', gifId);
+            img.onclick = function () {
+                var currentId = this.getAttribute("gif-id");
+                if (savedIds != null) {
+                    savedIds.push(currentId);
+                }
+                else {
+                    savedIds = [currentId];
+                }
+
+                img.setAttribute('class', 'fav-button-selected');
+                localStorage.setItem("favorites-gifs-ids", JSON.stringify(savedIds));
+            };
+        }
+
+        div.appendChild(img);
+    }
 }
 
 function removeImages(mainDiv) {
     var div = mainDiv.getElementsByClassName("img-div")[0];
     var img1 = div.getElementsByClassName("max-button");
-    if(img1.length > 0)
-    {
+    if (img1.length > 0) {
         div.removeChild(img1[0]);
-    }    
+    }
 
     var img2 = div.getElementsByClassName("download-button");
-    if(img2.length > 0)
-    {
+    if (img2.length > 0) {
         div.removeChild(img2[0]);
-    }   
+    }
 
     var img3 = div.getElementsByClassName("fav-button");
-    if(img3.length > 0)
-    {
+    if (img3.length > 0) {
         div.removeChild(img3[0]);
-    } 
-}
+    }
 
-function saveFavorites() {
-    alert('Esto es una prueba');
+    var img3Selected = div.getElementsByClassName("fav-button-selected");
+    if (img3Selected.length > 0) {
+        div.removeChild(img3Selected[0]);
+    }
 }
 
 function seeMore() {
@@ -127,7 +152,7 @@ function currentSlide(n) {
 
 function showSlides(n) {
     var i;
-    var slides = document.getElementsByClassName("mySlides");   
+    var slides = document.getElementsByClassName("mySlides");
     if (n > slides.length) { slideIndex = 1 }
     if (n < 1) { slideIndex = slides.length }
     for (i = 0; i < slides.length; i++) {
@@ -150,14 +175,44 @@ function fillSlides() {
 
 }
 
+function searchFavorites(ifSeeMore) {
+    var savedIds = JSON.parse(localStorage.getItem("favorites-gifs-ids"));
+    var concatIds = savedIds.join(',');
+    var url = "https://api.giphy.com/v1/gifs?api_key=uXeIYjblhtWKqef33kir3YfDInqBBfD4&ids=" + concatIds + "&limit=12&offset=0&rating=r&lang=en";
+
+    fetch(url)
+        .then((resp) => resp.json())
+        .then(function (response) {
+            // inicializar el html para resultados no guardados en "historial"
+            if (ifSeeMore == false) {
+                document.getElementById('favoritesDiv').innerHTML = '';
+            }
+
+            document.getElementById('seeMoreFavoritesButton').classList.remove('hiddenButton');
+
+            response.data.forEach(element => {
+                var url = element.images.downsized.url;
+                var div = document.createElement('div');
+
+                div.className = 'div-gifs';
+                div.style.backgroundImage = 'url(' + url + ')';
+                div.onmouseover = function () { createImages(div, url, element.id); };
+                div.onmouseleave = function () { removeImages(div); };
+                div.innerHTML = "<div class='img-div'></div>";
+                // asignar gif
+                document.getElementById('favoritesDiv').appendChild(div);
+            });
+        })
+}
+
 var modal = document.getElementById("myModal");
 var imgMax = document.getElementById("imgGifMax")
 
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modal) {
-      modal.style.display = "none";
+        modal.style.display = "none";
     }
-  }
+}
 
 
 

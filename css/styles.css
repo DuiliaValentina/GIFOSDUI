@@ -207,8 +207,8 @@ main .containerFavorites .noFavoritesDiv .noFavoritesText{
   line-height: 25px;
 }
 
-.img1 {
-  padding-right: 50px;
+main .container1 .img1 img {
+    padding-right: 50px;
 }
 
 main .description{
@@ -416,7 +416,7 @@ footer .line-bottom{
   height: 90%;
 }
 
-@media screen and (max-width: 440px){
+@media screen and (max-width: 600px){
   header .logo {
     float: left;
     margin-top: 3%;
@@ -527,11 +527,37 @@ footer .line-bottom{
     display: none;
   }
 
-  main .container1 h1{
-    margin-top: 30%;
+  main .container1{
+    width: 50%;
+    margin: auto;
+    margin-top: 20%;
     font-size: 25px;
     line-height: 33px;
   }
+
+  main .container1 .img1 img{
+    width: 273px;
+    height: 130px;
+    padding-right: 0px;
+  }
+
+  main .container1 .searchText{
+    width: 334px;
+    height: 50px;
+  }
+
+   .div-gifs{
+    display: block;
+    width: 41%;
+    margin: 10px;
+  }
+
+  footer .footer1 {
+    display: inherit;
+    text-align: center;
+    margin: auto;
+  }
+
 
 }
   

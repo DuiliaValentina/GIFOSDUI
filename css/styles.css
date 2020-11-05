@@ -159,11 +159,24 @@ main .container1 h1{
   line-height: 50px;
 }
 
+main .container1 .noResultsDiv{
+  padding-top: 50px;
+  display: none;
+}
+
+main .container1 .noResultsDiv .noResultsText{
+  font-family: Montserrat-Bold;
+  font-size: 22px;
+  color: #50E3C2;
+  text-align: center;
+  line-height: 25px;
+}
+
 main .container1 .colgif{
   color:aqua;
 }
 
-.searchText {
+main .container1 .searchText{
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
    border-radius: 50px;
@@ -174,11 +187,24 @@ main .container1 .colgif{
    font-size: 15px;
    background: url(../assets/icon-search.svg) no-repeat scroll 7px 7px;
    background-position-x: 96%;
-   background-position-y: 50%;
+   background-position-y: 50%;  
 }
 
-.searchText:focus {
+main .container1 .searchText:focus {
   outline: none;
+}
+
+main .containerFavorites .noFavoritesDiv{
+  padding-top: 50px;
+  display: none;
+}
+
+main .containerFavorites .noFavoritesDiv .noFavoritesText{
+  font-family: Montserrat-Bold;
+  font-size: 22px;
+  color: #50E3C2;
+  text-align: center;
+  line-height: 25px;
 }
 
 .img1 {

@@ -1,7 +1,8 @@
 var offset = 0;
+var favoritesOffset = 0;
 
 fillSlides();
-searchFavorites(false);
+searchFavorites(0, false);
 
 function Search(e) {
     if (e.keyCode === 13) {
@@ -17,25 +18,31 @@ function searchPrefetch(offset, ifSeeMore) {
     fetch(url)
         .then((resp) => resp.json())
         .then(function (response) {
-            // inicializar el html para resultados no guardados en "historial"
-            if (ifSeeMore == false) {
-                document.getElementById('searchDiv').innerHTML = '';
+            if (response.data.length > 0) {
+                document.getElementById('noResultsDiv').style.display = 'none';
+
+                if (ifSeeMore == false) {
+                    document.getElementById('searchDiv').innerHTML = '';
+                }
+
+                document.getElementById('seeMoreButton').classList.remove('hiddenButton');
+                response.data.forEach(element => {
+                    var url = element.images.downsized.url;
+                    var div = document.createElement('div');
+
+                    div.className = 'div-gifs';
+                    div.style.backgroundImage = 'url(' + url + ')';
+                    div.onmouseover = function () { createImages(div, url, element.id); };
+                    div.onmouseleave = function () { removeImages(div); };
+                    div.innerHTML = "<div class='img-div'></div>";
+                    // asignar gif
+                    document.getElementById('searchDiv').appendChild(div);
+                });
             }
-
-            document.getElementById('seeMoreButton').classList.remove('hiddenButton');
-
-            response.data.forEach(element => {
-                var url = element.images.downsized.url;
-                var div = document.createElement('div');
-
-                div.className = 'div-gifs';
-                div.style.backgroundImage = 'url(' + url + ')';
-                div.onmouseover = function () { createImages(div, url, element.id); };
-                div.onmouseleave = function () { removeImages(div); };
-                div.innerHTML = "<div class='img-div'></div>";
-                // asignar gif
-                document.getElementById('searchDiv').appendChild(div);
-            });
+            else {
+                document.getElementById('searchDiv').innerHTML = '';
+                document.getElementById('noResultsDiv').style.display = 'inherit';
+            }
         })
 }
 
@@ -139,6 +146,15 @@ function seeMore() {
     searchPrefetch(offset, true);
 }
 
+function seeMoreFavorites() {
+    if (favoritesOffset == 0) {
+        favoritesOffset = 12;
+    } else {
+        favoritesOffset += 12;
+    }
+    searchFavorites(favoritesOffset, true);
+}
+
 var slideIndex = 1;
 showSlides(slideIndex);
 
@@ -175,34 +191,45 @@ function fillSlides() {
 
 }
 
-function searchFavorites(ifSeeMore) {
+function searchFavorites(offset, ifSeeMore) {
     var savedIds = JSON.parse(localStorage.getItem("favorites-gifs-ids"));
-    var concatIds = savedIds.join(',');
-    var url = "https://api.giphy.com/v1/gifs?api_key=uXeIYjblhtWKqef33kir3YfDInqBBfD4&ids=" + concatIds + "&limit=12&offset=0&rating=r&lang=en";
 
-    fetch(url)
-        .then((resp) => resp.json())
-        .then(function (response) {
-            // inicializar el html para resultados no guardados en "historial"
-            if (ifSeeMore == false) {
-                document.getElementById('favoritesDiv').innerHTML = '';
-            }
+    if (savedIds) {
+        var concatIds = savedIds.join(',');
+        var url = "https://api.giphy.com/v1/gifs?api_key=uXeIYjblhtWKqef33kir3YfDInqBBfD4&ids=" + concatIds + "&limit=12&offset=" + offset + "&rating=r&lang=en";
 
-            document.getElementById('seeMoreFavoritesButton').classList.remove('hiddenButton');
+        fetch(url)
+            .then((resp) => resp.json())
+            .then(function (response) {
+                if (response.data.length > 0) {
+                    document.getElementById('noFavoritesDiv').style.display = 'none';
 
-            response.data.forEach(element => {
-                var url = element.images.downsized.url;
-                var div = document.createElement('div');
+                    // inicializar el html para resultados no guardados en "historial"
+                    if (ifSeeMore == false) {
+                        document.getElementById('favoritesDiv').innerHTML = '';
+                    }
 
-                div.className = 'div-gifs';
-                div.style.backgroundImage = 'url(' + url + ')';
-                div.onmouseover = function () { createImages(div, url, element.id); };
-                div.onmouseleave = function () { removeImages(div); };
-                div.innerHTML = "<div class='img-div'></div>";
-                // asignar gif
-                document.getElementById('favoritesDiv').appendChild(div);
-            });
-        })
+                    document.getElementById('seeMoreFavoritesButton').classList.remove('hiddenButton');
+
+                    response.data.forEach(element => {
+                        var url = element.images.downsized.url;
+                        var div = document.createElement('div');
+
+                        div.className = 'div-gifs';
+                        div.style.backgroundImage = 'url(' + url + ')';
+                        div.onmouseover = function () { createImages(div, url, element.id); };
+                        div.onmouseleave = function () { removeImages(div); };
+                        div.innerHTML = "<div class='img-div'></div>";
+                        // asignar gif
+                        document.getElementById('favoritesDiv').appendChild(div);
+                    });
+                }
+                else {
+                    document.getElementById('favoritesDiv').innerHTML = '';
+                    document.getElementById('noFavoritesDiv').style.display = 'inherit';
+                }
+            })
+    }
 }
 
 var modal = document.getElementById("myModal");

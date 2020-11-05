@@ -45,6 +45,13 @@
             </div>
             <input onkeypress="Search(event)" class="searchText" placeholder="Buscar GIFOS y más" id="searchText"
                 type="text" />
+            <div id="noResultsDiv" class="noResultsDiv">
+                <img src="assets/icon-busqueda-sin-resultado.svg" alt="busqueda-sin-resultados">
+                <br>
+                <span id ="noResultsText" class="noResultsText">
+                    Intenta con otra búsqueda.
+                </span>
+            </div>
             <h4 id="searchResults"> </h4>
             <div id="searchDiv" class="styleSearch">
             </div>
@@ -60,9 +67,18 @@
                 Favoritos
             </h2>
             <br>
+            <div id="noFavoritesDiv" class="noResultsDiv">
+                <img src="assets/icon-fav-sin-contenido.svg" alt="sin-favoritos">
+                <br>
+                <span id ="noFavoritesText" class="noResultsText">
+                    "¡Guarda tu primer GIFO en Favoritos 
+                    <br>
+                    para que se muestre aquí!"
+                </span>
+            </div>
             <div id="favoritesDiv" class="styleSearch">
             </div>
-            <button onclick="seeMore()" id="seeMoreFavoritesButton" class="hiddenButton buttonSeeMore">
+            <button onclick="seeMoreFavorites()" id="seeMoreFavoritesButton" class="hiddenButton buttonSeeMore">
                 <img src="assets/CTA-ver-mas.svg" alt="imagen-ver-mas">
             </button>
         </section>

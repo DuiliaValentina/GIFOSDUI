@@ -33,7 +33,8 @@
                     <li><a href="#gifos">MIS GIFOS</a>
                         <hr>
                     </li>
-                    <li class="img-plus"><img src="assets/button-crear-gifo.svg" alt="imagen-mas"></li>
+                    <li class="img-plus"><a href="#createGifo"><img src="assets/button-crear-gifo.svg"
+                                alt="imagen-mas"></a></li>
                 </ul>
             </div>
         </nav>
@@ -105,6 +106,7 @@
                 Mira los últimos GIFO de nuestra comunidad.
             </p>
             <br>
+
             <div class="slideshow-container">
                 <button class="btn-carrusel" onclick="plusSlides(-1)">
                     <img class="prev-button" alt="imagen-carrusel">
@@ -131,6 +133,24 @@
                 <button class="btn-carrusel" onclick="plusSlides(1)">
                     <img class="next-button" alt="imagen-carrusel">
                 </button>
+            </div>
+        </section>
+        <section class="" id="createGifo">
+            <div class="create-gifo">
+                <div class="video-div" id="videoDiv">
+                    <div class="open-video-text-div">
+                        <p class="open-video-main-text">¿Nos das acceso</p>
+                        <p class="open-video-main-text">a tu cámara?</p>
+                        <p class="open-video-secondary-text">El acceso a tu cámara será válido sólo</p>
+                        <p class="open-video-secondary-text">por el tiempo en el que estés creando el GIFO.</p>
+                    </div>
+                </div>
+
+                <div class="open-video-button-div">
+                    <button onclick="openVideo()" class="open-video-button">
+                        GRABAR
+                    </button>
+                </div>
             </div>
         </section>
     </main>

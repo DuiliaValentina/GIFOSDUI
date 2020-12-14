@@ -173,7 +173,7 @@ function createMaxButton(imageDiv, url, gifId, title) {
         header.style.display = "none";
         document.body.style.overflow = "hidden";
         createDownloadButton(modalActions, url, title);
-        createFavoriteButton(modalActions,gifId);
+        createFavoriteButton(modalActions, gifId);
     };
     imageDiv.appendChild(img);
 }
@@ -268,6 +268,36 @@ function removeImagesButtons(div) {
 function removeImageTitle() {
     var element = document.getElementsByClassName('img-gif-title')[0];
     element.parentNode.removeChild(element);
+}
+
+function openVideo() {
+    var createVideoDiv = document.getElementById("videoDiv");
+
+    if(createVideoDiv.getElementsByTagName('video').length < 1){
+        createVideoDiv.innerHTML = '';
+        var video = document.createElement('video');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('autoplay', '');
+        video.setAttribute('muted', '');
+        video.style.width = '100%';
+        video.style.height = '100%';
+    
+        createVideoDiv.appendChild(video);
+    
+        /* Setting up the constraint */
+        var facingMode = "user"; // Can be 'user' or 'environment' to access back or front camera (NEAT!)
+        var constraints = {
+            audio: false,
+            video: {
+                facingMode: facingMode
+            }
+        };
+    
+        /* Stream it to video element */
+        navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+            video.srcObject = stream;
+        });
+    }    
 }
 
 modalCloseButton.onclick = function (event) {

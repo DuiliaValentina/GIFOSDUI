@@ -39,11 +39,11 @@ img {vertical-align: middle;}
 }
 
 .next-button {
-  content: url(../assets/button-slider-right.svg);
+  content: url(../assets/Button-slider-right.svg);
 }
 
 .next-button:hover{
-  content: url(../assets/button-slider-right-hover.svg);
+  content: url(../assets/Button-slider-right-hover.svg);
 }
 
 /* Caption text */

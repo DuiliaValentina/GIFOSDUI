@@ -24,9 +24,15 @@
                 <span></span>
                 <span></span>
                 <ul>
-                    <li><a href="#nocturno">MODO NOCTURNO</a><hr></li>
-                    <li><a href="#favoritos">FAVORITOS</a><hr></li>
-                    <li><a href="#gifos">MIS GIFOS</a><hr></li>
+                    <li><a href="#nocturno">MODO NOCTURNO</a>
+                        <hr>
+                    </li>
+                    <li><a href="#favoritos">FAVORITOS</a>
+                        <hr>
+                    </li>
+                    <li><a href="#gifos">MIS GIFOS</a>
+                        <hr>
+                    </li>
                     <li class="img-plus"><img src="assets/button-crear-gifo.svg" alt="imagen-mas"></li>
                 </ul>
             </div>
@@ -43,23 +49,23 @@
             <div class="img1">
                 <img src="assets/ilustra_header.svg" alt="imagen-bienvenida">
             </div>
-            <input onkeypress="Search(event)" class="searchText" placeholder="Buscar GIFOS y más" id="searchText"
+            <input onkeypress="searchResults(event)" class="searchText" placeholder="Buscar GIFOS y más" id="searchText"
                 type="text" />
             <div id="noResultsDiv" class="noResultsDiv">
                 <img src="assets/icon-busqueda-sin-resultado.svg" alt="busqueda-sin-resultados">
                 <br>
-                <span id ="noResultsText" class="noResultsText">
+                <span id="noResultsText" class="noResultsText">
                     Intenta con otra búsqueda.
                 </span>
             </div>
             <h4 id="searchResults"> </h4>
-            <div id="searchDiv" class="styleSearch">
+            <div id="resultsDiv" class="styleSearch">
             </div>
             <button onclick="seeMore()" id="seeMoreButton" class="hiddenButton buttonSeeMore">
                 <img src="assets/CTA-ver-mas.svg" alt="imagen-ver-mas">
             </button>
         </section>
-        <section class="containerFavorites favorites" id="favoritos">            
+        <section class="containerFavorites favorites" id="favoritos">
             <h2>
                 <div class="logo">
                     <img src="assets/icon-favoritos.svg" alt="logo-favorites">
@@ -70,8 +76,8 @@
             <div id="noFavoritesDiv" class="noResultsDiv">
                 <img src="assets/icon-fav-sin-contenido.svg" alt="sin-favoritos">
                 <br>
-                <span id ="noFavoritesText" class="noResultsText">
-                    "¡Guarda tu primer GIFO en Favoritos 
+                <span id="noFavoritesText" class="noResultsText">
+                    "¡Guarda tu primer GIFO en Favoritos
                     <br>
                     para que se muestre aquí!"
                 </span>
@@ -121,7 +127,7 @@
                     <img class="trendingImg" src="#">
                     <img class="trendingImg" src="#">
                 </div>
-              
+
                 <button class="btn-carrusel" onclick="plusSlides(1)">
                     <img class="next-button" alt="imagen-carrusel">
                 </button>
@@ -148,11 +154,11 @@
                 </li>
                 <li>
                     <a href="https://www.instagram.com/">
-                        <i class="fab fa-instagram"> 
+                        <i class="fab fa-instagram">
                         </i>
                     </a>
                 </li>
-            </ul> 
+            </ul>
             <p>
                 © GIFOS 2020 All Rights Reserved.
             </p>
@@ -161,13 +167,16 @@
     </footer>
 
     <div id="myModal" class="modal">
-
         <!-- Modal content -->
-        <div class="modal-content">       
-          <img id="imgGifMax">          
+        <div class="modal-content">
+            <span class="modal-close">×</span>
+            <div class="modal-image">
+                <img width="75%" height="75%" id="imgGifMax">
+                <div class="modal-image-actions-div"></div>
+            </div>
         </div>
-      
-      </div>
+
+    </div>
 
     <script src="js/main.js"></script>
 </body>

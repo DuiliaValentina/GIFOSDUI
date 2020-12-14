@@ -320,6 +320,15 @@ main .container1 h4{
   background:rgba(87 , 46, 229, 0.6);   
 }
 
+.img-gif-title {
+  font-family: Roboto-Bold;
+  font-size: 16px;
+  color: #FFFFFF;
+  float: left;
+  padding-left: 12px;
+  padding-top: 150px;
+}
+
 .fav-button{
   content: url(../assets/icon-fav.svg);
   float: right;
@@ -332,10 +341,12 @@ main .container1 h4{
   float: right;
   padding-right: 10px;
   padding-top: 6px;
+  cursor: pointer;
 }
 
 .fav-button:hover{
   content: url(../assets/icon-fav-hover.svg);
+  cursor: pointer;
 }
 
 .download-button{
@@ -347,6 +358,7 @@ main .container1 h4{
 
 .download-button:hover{
   content: url(../assets/icon-download-hover.svg);
+  cursor: pointer;
 }
 
 .max-button{
@@ -358,6 +370,7 @@ main .container1 h4{
 
 .max-button:hover{
   content: url(../assets/icon-max-hover.svg);
+  cursor: pointer;
 }
 
 footer .footer1{
@@ -398,22 +411,39 @@ footer .line-bottom{
   display: none; 
   position: fixed; 
   z-index: 1; 
-  padding-top: 100px;
+  padding-top: 35px;
   left: 0;
   top: 0;
   width: 100%; 
   height: 100%; 
   overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4);
+  background-color: #ffffff;
 }
 
 .modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
-  width: 80%;
-  height: 90%;
+  width: 70%;
+  height: 80%;
+  text-align: center;
+}
+
+.modal-close {
+  color: #572EE5;
+  float: right;
+  font-size: 28px;
+  cursor: pointer; 
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  padding-top: 70px;
+}
+
+.modal-image-actions-div {
+  width: 88%;
 }
 
 @media screen and (max-width: 600px){
